@@ -19,6 +19,10 @@
                             <router-link class="nav-link active text-light" to="/about">
                                 <i class="fa-solid fa-circle-info"></i> Sobre</router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link active text-light" to="/document">
+                                <i class="fa-solid fa-file"></i> Documentos</router-link>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown" v-if="!hasUser">
@@ -62,9 +66,7 @@
                                     <button class="btn btn-outline-light btn-sm" style="color:black"><i
                                             class="fa-solid fa-right-from-bracket"></i> Sair</button>
                                 </li>
-
                             </ul>
-
                         </li>
                     </ul>
                 </div>

@@ -75,15 +75,7 @@ class LoginController extends Controller
             return redirect()->to('/');
         }
 
-        $val = Validator::make($request->all(), [
-            'atual' => "required|string",
-            'nova' => "required|string",
-            'confirmacao' => "required|string",
-        ]);
-        if ($val->fails()) {
-            return response()->json(['errors' => $val->errors()], 422);
-        }
-        if($request['nova'] !== $request['confirmacao']) {
+        if(!$request['nova'] || $request['confirmacao'] || $request['nova'] !== $request['confirmacao']) {
             return response()->json(['errors' => 'As senhas não conferem'], 422);
         }
 
@@ -93,10 +85,6 @@ class LoginController extends Controller
 
         $user->password = Hash::make($request->nova);
         $user->save();
-
         return response()->json(['Senha alterada com sucesso!'], 200);
-
-
-
     }
 }
