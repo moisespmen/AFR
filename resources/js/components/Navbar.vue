@@ -63,7 +63,7 @@
                                         Alterar Senha </button>
                                 </li>
                                 <li class="mt-3">
-                                    <button class="btn btn-outline-light btn-sm" style="color:black"><i
+                                    <button class="btn btn-outline-light btn-sm" style="color:black" @click="sair()"><i
                                             class="fa-solid fa-right-from-bracket"></i> Sair</button>
                                 </li>
                             </ul>
@@ -150,9 +150,13 @@ export default {
     },
 
     methods: {
+        sair(){
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('user_name');
+        },
         alterarSenha() {
             const vm = this;
-            console.log('alterar senha')
             vm.loadingSenha = true
             axios.post('/api/alterar-senha', this.senha)
                 .then((response) => {
