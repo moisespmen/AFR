@@ -20,12 +20,18 @@ class DocumentosController extends Controller
     {
         $user = Auth::user();
         $documentos = Documento::query();
-        if(!$user && $request->has('protocolo')){
+        if ($request->has('protocolo') && $request['protocolo']) {
             $documentos = $documentos->where('protocolo', trim($request['protocolo']));
-        } else if(!$user) {
+        } else if (!$user) {
             return response()->json(['Informe o protocolo!'], 422);
         }
-        $documentos = $documentos->get();
+
+        $documentos = $documentos->with('user');
+        if ($request->get('perPage')) {
+            $documentos = $documentos->paginate($request['perPage']);
+        } else {
+            $documentos = $documentos->get();
+        }
         return response()->json($documentos);
     }
 
@@ -103,6 +109,17 @@ class DocumentosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth::user();
+
+        if (!$user) {
+            throw new \Exception('Acesso não autorizado!');
+        }
+
+        $documento = Documento::findOrFail($id);
+        Storage::delete($documento->path);
+
+        $documento->delete();
+
+        return response()->json('arquivo excluído com sucesso!');
     }
 }

@@ -12,6 +12,7 @@ Route::prefix('api')->group(function () {
         Route::get('/documentos-user', [DocumentosController::class, 'index']);
         Route::post('/alterar-senha', [LoginController::class, 'alterarSenha']);
         Route::post('/documentos', [DocumentosController::class, 'store']);
+        Route::delete('/documentos/{id}', [DocumentosController::class, 'destroy']);
     });
 });
 

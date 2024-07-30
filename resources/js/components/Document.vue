@@ -1,3 +1,8 @@
+<style>
+.excluir {
+    color: crimson;
+}
+</style>
 <template>
     <div class="card m-3" style="min-height: 500px;">
         <div class="card-body">
@@ -10,47 +15,66 @@
                 </div>
             </div>
 
-            <div class="row mt-3">
+            <div class="row mt-3 align-items-end input-group input-group-sm">
                 <div class="col">
-                    <button type="button" class="btn btn-primary btn-sm" @click="getDocumentos()">
+                    <label for="protocol">Protocolo</label>
+                    <input type="text" id="protocol" class="form-control input-sm" aria-label="Protocolo"
+                        @keyup.enter="getDocumentos()" v-model="protocolo">
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" @click="getDocumentos()">
                         <i class="fa-solid fa-magnifying-glass"></i> Buscar
                     </button>
                 </div>
             </div>
-            <div class="d-flex justify-content-center mt-2 text-primary" v-if="loading">
+            <div class="d-flex justify-content-center mt-2 text-primary mt-3" v-if="loading">
                 <div class="spinner-border" role="status" />
                 Carregando Documentos...
             </div>
             <div v-else>
-                <table class="table table-striped table-hover mt-3" v-if="documentos.length > 0">
+                <table class="table table-striped table-hover mt-3 responsive" v-if="documentos.length > 0">
                     <thead>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Protocolo</th>
                             <th scope="col">Descrição</th>
+                            <th scope="col" v-if="user">Alterado em</th>
+                            <th scope="col" v-if="user">Alterado por</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(doc, index) in documentos" :key="index">
-                            <th scope="row">
-                                <!--Excluir arquivo-->
-                                <div v-if="getExtensao(doc.path) == 'pdf'">
-                                    <a :href="doc.path.replace('public', 'storage')" target="_blank">
-                                        <i class="fa-solid fa-file-pdf"></i>
-                                    </a>
-                                </div>
-                                <div
-                                    v-else-if="getExtensao(doc.path) == 'jpg' || getExtensao(doc.path) == 'jpeg' || getExtensao(doc.path) == 'png'">
-                                    <a :href="doc.path.replace('public', 'storage')" target="_blank">
-                                        <i class="fa-solid fa-image"></i>
-                                    </a>
-                                </div>
-                            </th>
+                            <td style="min-width: 50px;">
+                                <a v-if="user" style="margin-right: 15px;" class="excluir" title="Excluir" href="#"
+                                    @click="excluir(doc.id)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                                <a v-if="getExtensao(doc.path) == 'pdf'" :href="doc.path.replace('public', 'storage')"
+                                    target="_blank" title="Visualizar">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </a>
+                                <a v-else-if="getExtensao(doc.path) == 'jpg' || getExtensao(doc.path) == 'jpeg' || getExtensao(doc.path) == 'png'"
+                                    :href="doc.path.replace('public', 'storage')" target="_blank" title="Visualizar">
+                                    <i class="fa-solid fa-image"></i>
+                                </a>
+                            </td>
                             <td>{{ doc.protocolo }}</td>
                             <td>{{ doc.descricao }}</td>
+                            <td v-if="user">{{ formatDate(doc.updated_at) }}</td>
+                            <td v-if="user">{{ doc.user.name }}</td>
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="mt-3">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{ disabled: !paginate.prev_page_url }">
+                            <a class="page-link" href="#" @click.prevent="fetchItems(items.prev_page_url)">Previous</a>
+                        </li>
+                        <li class="page-item" :class="{ disabled: !paginate.next_page_url }">
+                            <a class="page-link" href="#" @click.prevent="fetchItems(items.next_page_url)">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -110,6 +134,7 @@
 
 <script>
 import axios from '../axios';
+import moment from 'moment';
 export default {
     data() {
         return {
@@ -119,7 +144,11 @@ export default {
             file: null,
             user: "",
             loading: false,
-            loadingModal: false
+            loadingModal: false,
+            paginate: {
+                currentPage: 1,
+                perPage: 20,
+            }
         }
     },
     computed: {
@@ -132,20 +161,47 @@ export default {
         }
     },
     methods: {
+        excluir(doc) {
+            this.$swal({
+                icon: 'warning',
+                title: "Deseja realmente excluir este arquivo?",
+                showDenyButton: true,
+                confirmButtonText: "Sim, Excluir",
+                confirmButtonColor: '#0d6efd',
+                denyButtonText: `Cancelar`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete('/api/documentos/' + doc)
+                        .then((response) => {
+                            this.$swal.fire("Arquivo exclído com sucesso!", "", "success");
+                            this.getDocumentos();
+                        }).catch((error) => {
+                            this.$swal.fire("Erro ao excluir documento", "", "error");
+                        })
+                }
+            });
+        },
         getExtensao(path) {
             const extension = path.split('.').pop().toLowerCase();
             return extension;
         },
         getDocumentos() {
             const vm = this;
+            if (!this.user && !this.protocolo) {
+                return this.$swal('Informe um numero de protocolo', "", "error")
+            }
             const url = localStorage.getItem('token') && this.user ? '/api/documentos-user' : '/api/documentos'
             vm.loading = true
             let form = {
-                perPage: 20
+                perPage: this.paginate.perPage,
+                protocolo: this.protocolo
             }
-            axios.get(url, { form: form })
+            axios.get(url, { params: form })
                 .then((response) => {
-                    vm.documentos = response.data;
+                    console.log(response.data)
+                    vm.documentos = response.data.data;
+                    vm.paginate.currentPage = response.data.current_page;
+                    vm.paginate.total = response.data.total;
                 }).catch((error) => {
                     console.log(error)
                 }).finally(() => {
@@ -181,6 +237,9 @@ export default {
                 }).finally(() => {
                     vm.loadingModal = false
                 })
+        },
+        formatDate(date) {
+            return moment(date).format('D/MM/Y')
         }
     }
 
