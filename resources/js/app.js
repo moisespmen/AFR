@@ -12,6 +12,7 @@ import Home from './components/Home.vue';
 import About from './components/About.vue';
 import App from './components/App.vue';
 import Document from './components/Document.vue';
+import '@/assets/scss/app.scss'  // './assets/scss/_variables';
 
 // import router from './routes';
 

@@ -12,7 +12,7 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <router-link class="nav-link active text-light" to="/">
-                                <i class="fa-solid fa-house"></i> Home
+                                <i class="fa-solid fa-house"></i> Inicio
                             </router-link>
                         </li>
                         <li class="nav-item">
