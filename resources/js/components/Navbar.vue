@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container-fluid">
                 <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
@@ -15,10 +14,10 @@
                                 <i class="fa-solid fa-house"></i> Inicio
                             </router-link>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <router-link class="nav-link active text-light" to="/about">
                                 <i class="fa-solid fa-circle-info"></i> Sobre</router-link>
-                        </li>
+                        </li>-->
                         <li class="nav-item">
                             <router-link class="nav-link active text-light" to="/document">
                                 <i class="fa-solid fa-file"></i> Documentos</router-link>
@@ -54,7 +53,7 @@
                         <li class="nav-item dropdown" v-else>
                             <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fa-solid fa-user"></i> {{ userName }}
+                                <i class="fa-solid fa-user"></i> {{ getUserName }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 260px;">
                                 <li>
@@ -63,7 +62,7 @@
                                         Alterar Senha </button>
                                 </li>
                                 <li class="mt-3">
-                                    <button class="btn btn-outline-light btn-sm" style="color:black" @click="sair()"><i
+                                    <button class="btn btn-outline-light btn-sm" style="color:black" @click="logoff"><i
                                             class="fa-solid fa-right-from-bracket"></i> Sair</button>
                                 </li>
                             </ul>
@@ -119,6 +118,9 @@
 
 <script>
 import axios from '../axios';
+import { mapActions } from 'vuex';
+// import store from '../store';
+
 export default {
     data() {
         return {
@@ -131,29 +133,25 @@ export default {
                 login: '',
                 password: ''
             },
-            hasUser: false,
             userName: "",
             loadingSenha: false
         };
     },
 
-    mounted() {
-        const token = localStorage.getItem('token');
-        const id = localStorage.getItem('user_id');
-        this.userName = localStorage.getItem('user_name');
-        if (token && id && this.userName) {
-            this.hasUser = true;
-        }
-        else {
-            this.hasUser = false;
+    computed: {
+
+        getUserName() {
+            return this.$store.state.user.name;
+        },
+        hasUser(){
+            return this.$store.state.user;
         }
     },
 
     methods: {
-        sair(){
-            localStorage.removeItem('token');
-            localStorage.removeItem('user_id');
-            localStorage.removeItem('user_name');
+        ...mapActions(['saveToken']),
+        logoff(){
+            this.$store.dispatch('logout');
         },
         alterarSenha() {
             const vm = this;
@@ -164,8 +162,6 @@ export default {
                 }).catch((error) => {
                     const errors = error.response.data.errors;
                     let errorMessages = '';
-
-                    // Concatene todas as mensagens de erro em uma única string
                     for (const [field, messages] of Object.entries(errors)) {
                         errorMessages += `${messages.join(', ')}\n`;
                     }
@@ -175,31 +171,6 @@ export default {
                         title: 'Erro',
                         text: errorMessages.trim()
                     });
-
-                   /* if (error.response.data.errors && (typeof (error.response.data.errors) == 'object')) {
-                        let err = "";
-                        let arr = Object.values(error.response.data.errors);
-                        arr.forEach((el) => {
-                            err += el + '<br>'
-                        })
-                        vm.$swal({
-                            title: "Atenção",
-                            html: error.response.data.errors,
-                            icon: "error"
-                        });
-                    } else if (error.response.data.errors && typeof (error.response.data.errors) == 'string') {
-                        vm.$swal({
-                            title: "Atenção",
-                            text: error.response.data.errors,
-                            icon: "error"
-                        });
-                    } else {
-                        vm.$swal({
-                            title: "Atenção",
-                            text: "Erro ao alterar senha",
-                            icon: "error"
-                        });
-                    }*/
                 }).finally(() => {
                     vm.loadingSenha = false
                 })
@@ -216,11 +187,9 @@ export default {
             }
             await axios.post('/api/login', vm.formData)
                 .then((response) => {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('user_id', response.data.user.id);
-                    localStorage.setItem('user_name', response.data.user.name);
+                    this.$store.dispatch('fetchUser');
+                    this.saveToken(response.data.token);
                     vm.userName = response.data.user.name;
-                    vm.hasUser = true;
                 }).catch((error) => {
                     console.log(error);
                     vm.$swal({

@@ -1,4 +1,3 @@
-
 import { createApp } from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -12,9 +11,8 @@ import Home from './components/Home.vue';
 import About from './components/About.vue';
 import App from './components/App.vue';
 import Document from './components/Document.vue';
-import '@/assets/scss/app.scss'  // './assets/scss/_variables';
+import store from './store';
 
-// import router from './routes';
 
 const routes = [
     { path: '/', component: Home },
@@ -28,8 +26,7 @@ const router = createRouter({
 });
 
 const app = createApp(App);
-
 app.use(router);
+app.use(store);
 app.use(VueSweetalert2);
-
 app.mount('#app');

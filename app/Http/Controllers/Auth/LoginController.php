@@ -87,4 +87,12 @@ class LoginController extends Controller
         $user->save();
         return response()->json(['Senha alterada com sucesso!'], 200);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return response()->json(['message' => 'Logout realizado com sucesso']);
+    }
 }

@@ -17,8 +17,7 @@ class auth
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($guard != null)
-            auth()->shouldUse($guard);
+        if ($guard != null) auth()->shouldUse($guard);
         return $next($request);
     }
 }
