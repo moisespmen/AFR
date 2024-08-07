@@ -49,6 +49,8 @@ const store = createStore({
                     commit('clearUser');
                     commit('clearToken');
                 }).catch((error) => {
+                    commit('clearUser');
+                    commit('clearToken');
                     console.error('Logout failed:', error);
                 });
         },

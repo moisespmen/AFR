@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <nav class="navbar navbar-expand-lg bg-primary">
+    <div class="wrapper">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -23,8 +23,28 @@
                                 <i class="fa-solid fa-file"></i> Documentos</router-link>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown" v-if="!hasUser">
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+                        <li class="nav-item">
+                            <div class="social-midia">
+
+                                <a href="https://www.instagram.com/anaflaviaribeiro.cont?igsh=dWI3enIzOWRya3Bp&utm_source=qr"
+                                    target="_blank" title="Instagram Ana Flavia Ribeiro">
+                                    <i class="fa-brands fa-instagram fa-xl"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/ana-flavia-ribeiro-0b9008224/" target="_blank"
+                                    title="Linkedin">
+                                    <i class="fa-brands fa-linkedin fa-xl"></i>
+                                </a>
+                                <a href="https://wa.me/5562996132702" target="_blank" title="Whatsapp: (62) 99613-2702">
+                                    <i class="fa-brands fa-whatsapp fa-xl"></i>
+                                </a>
+                                <a href="mailto:assessoriarj@soluccontconsultorias.com"
+                                    title="Email: assessoriarj@soluccontconsultorias.com">
+                                    <i class="fa-regular fa-envelope fa-xl"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown auth" v-if="!hasUser">
                             <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fa-solid fa-user"></i> Acessar
@@ -50,7 +70,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown" v-else>
+                        <li class="nav-item dropdown auth" v-else>
                             <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fa-solid fa-user"></i> {{ getUserName }}
@@ -71,6 +91,11 @@
                 </div>
             </div>
         </nav>
+
+        <main class="content">
+            <router-view></router-view>
+        </main>
+
         <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -113,13 +138,18 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <p>Avenida D, esquina com Rua 09, Nº 419, Qd G-11, Lt 01, Edifício Comercial Marista, 4º Andar, Setor
+                Marista, Goiânia – GO</p>
+            <p>&copy; {{ ano }} Ana Flávia Ribeiro. Todos os direitos reservados.</p>
+        </footer>
     </div>
 </template>
 
 <script>
 import axios from '../axios';
 import { mapActions } from 'vuex';
-// import store from '../store';
+import moment from 'moment';
 
 export default {
     data() {
@@ -134,23 +164,24 @@ export default {
                 password: ''
             },
             userName: "",
-            loadingSenha: false
+            loadingSenha: false,
+            loading: false,
+            ano: moment().format('Y')
         };
     },
 
     computed: {
-
         getUserName() {
             return this.$store.state.user.name;
         },
-        hasUser(){
+        hasUser() {
             return this.$store.state.user;
         }
     },
 
     methods: {
         ...mapActions(['saveToken']),
-        logoff(){
+        logoff() {
             this.$store.dispatch('logout');
         },
         alterarSenha() {
@@ -185,6 +216,7 @@ export default {
                 });
                 return
             }
+            vm.loading = true
             await axios.post('/api/login', vm.formData)
                 .then((response) => {
                     this.$store.dispatch('fetchUser');
@@ -197,6 +229,8 @@ export default {
                         text: "Usuário e/ou senha inválido",
                         icon: "warning"
                     });
+                }).finally(() => {
+                    vm.loading = false
                 })
         }
     }
@@ -206,9 +240,32 @@ export default {
 </script>
 
 <style scoped>
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.footer {
+    margin-top: auto;
+    background-color: rgb(0, 46, 93);
+    padding-top: 10px;
+    text-align: center;
+    color: aliceblue;
+}
+
 nav {
-    background-color: #333;
+    background-color: rgb(0, 46, 93);
     padding: 1rem;
+    width: 100%;
+    height: 60px;
+    z-index: 10;
 }
 
 router-link {
@@ -219,5 +276,31 @@ router-link {
 
 router-link:hover {
     text-decoration: underline;
+}
+
+.content {
+    min-height: calc(100vh - 60px);
+    padding: 20px;
+    padding-bottom: 60px;
+    position: initial;
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+.social-midia a {
+    color: white;
+    margin-left: 20px;
+}
+
+.auth {
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        background-color: rgb(0, 46, 93);
+    }
 }
 </style>
