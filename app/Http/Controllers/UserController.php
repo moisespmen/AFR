@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        if(!$user || ($user->email !== 'anaflavia@soluccontconsultorias.com' && $user->email !== 'moisespmen@gmail.com' )){
+            abort(403, 'Não autorizado!');
+        }
+
+        $users = User::all();
+        return response()->json($users);
     }
 
     /**

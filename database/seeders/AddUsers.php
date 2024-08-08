@@ -18,5 +18,12 @@ class AddUsers extends Seeder
         $user->email = 'moisespmen@gmail.com';
         $user->password = bcrypt('admin');
         $user->save();
+        unset($user);
+
+        $user = new User();
+        $user->name = 'Ana Flávia Ribeiro';
+        $user->email = 'anaflavia@soluccontconsultorias.com';
+        $user->password = bcrypt('admin');
+        $user->save();
     }
 }

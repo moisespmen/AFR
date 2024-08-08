@@ -1,81 +1,3 @@
-<style>
-.container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.image-body {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: auto;
-    z-index: -1;
-}
-
-.text-center {
-    position: relative;
-    z-index: 0;
-    margin-top: 100px;
-    margin-bottom: 20px;
-
-}
-
-.card , .home-card {
-    background-color: rgb(255, 255, 255);
-      color: black;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.img-background{
-    position:relative ;
-}
-
-.home-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 80px;
-    margin-top: 60px;
-}
-
-.card-text {
-    text-align: justify;
-}
-
-.header-text {
-    margin-top: 0px;
-    color: rgb(255, 255, 255);
-    text-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-    -webkit-text-stroke: 0.3px black;
-}
-
-@media (min-width: 768px) {
-  .home-card {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: aliceblue;
-      width: calc(50% - 20px); /* Largura dos cards para telas médias (50% da largura do contêiner menos o espaçamento) */
-    }
-}
-@media (min-width: 992px) {
-    .home-card {
-    width: calc(33.333% - 20px); /* Largura dos cards para telas grandes (33.333% da largura do contêiner menos o espaçamento) */
-  }
-}
-</style>
 <template>
     <div>
         <img src="http://localhost:8000/image/justica.png" class="img-fluid image-body">
@@ -84,7 +6,8 @@
             <h6 class="text-center header-text">
                 <span>PERITA & ADMINISTRADORA JUDICIAL</span>
             </h6> -->
-            <img src="http://localhost:8000/image/anaflavia.webp" alt="" class="img-fluid img-background text-center header-text">
+            <img src="http://localhost:8000/image/anaflavia.webp" alt=""
+                class="img-fluid img-background text-center header-text">
         </div>
         <div class="card-container d-flex justify-content-center">
             <div class="card home-card" style="width: 40rem;">
@@ -113,3 +36,78 @@
         </div>
     </div>
 </template>
+
+<style>
+.image-body {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.text-center {
+    position: relative;
+    z-index: 0;
+    margin-top: 100px;
+    margin-bottom: 20px;
+
+}
+
+.card,
+.home-card {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    height: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.img-background {
+    position: relative;
+}
+
+.home-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 60px;
+}
+
+.card-text {
+    text-align: justify;
+}
+
+.header-text {
+    margin-top: 0px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    -webkit-text-stroke: 0.3px black;
+}
+
+@media (min-width: 768px) {
+    .home-card {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: aliceblue;
+        width: calc(50% - 20px);
+        /* Largura dos cards para telas médias (50% da largura do contêiner menos o espaçamento) */
+    }
+}
+
+@media (min-width: 992px) {
+    .home-card {
+        width: calc(33.333% - 20px);
+        /* Largura dos cards para telas grandes (33.333% da largura do contêiner menos o espaçamento) */
+    }
+}
+</style>

@@ -31,12 +31,12 @@ const store = createStore({
             if (!state.user) {
                 axios.get('/api/user/me')
                     .then((response) => {
-                        console.log(response.data);
                         const userResponse = response.data.user;
                         commit('setUser', userResponse);
                     })
                     .catch((error) => {
-                        commit('setUser', null);
+                        commit('clearUser');
+                        commit('clearToken');
                         console.log('not user', error);
                     });
             } else {
@@ -46,14 +46,17 @@ const store = createStore({
         logout({ commit }) {
             axios.post('/api/logout')
                 .then((response) => {
-                    commit('clearUser');
-                    commit('clearToken');
                 }).catch((error) => {
+                    console.error('Logout failed:', error);
+                }).finally(() => {
                     commit('clearUser');
                     commit('clearToken');
-                    console.error('Logout failed:', error);
                 });
         },
+        logoff({commit}){
+            commit('clearUser');
+            commit('clearToken');
+        }
     },
 
     getters: {

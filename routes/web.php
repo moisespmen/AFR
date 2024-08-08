@@ -12,6 +12,7 @@ Route::prefix('/api')->group(function () {
     Route::group(['middleware' => ['auth:app', 'jwt.auth']], function () {
         Route::post('/logout', [LoginController::class, 'logout']);
         Route::get("/user/me", [UserController::class, 'me']);
+        Route::get("/users", [UserController::class, 'index']);
         Route::get('/documentos-user', [DocumentosController::class, 'index']);
         Route::post('/alterar-senha', [LoginController::class, 'alterarSenha']);
         Route::post('/documentos', [DocumentosController::class, 'store']);

@@ -11,16 +11,25 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <router-link class="nav-link active text-light" to="/">
-                                <i class="fa-solid fa-house"></i> Inicio
+                                <i class="fa-solid fa-house"></i> Início
                             </router-link>
                         </li>
-                        <!-- <li class="nav-item">
-                            <router-link class="nav-link active text-light" to="/about">
-                                <i class="fa-solid fa-circle-info"></i> Sobre</router-link>
-                        </li>-->
+                        <li class="nav-item">
+                            <router-link class="nav-link active text-light" to="/contacts">
+                                <i class="fa-solid fa-envelopes-bulk"></i> Contatos
+                            </router-link>
+                        </li>
                         <li class="nav-item">
                             <router-link class="nav-link active text-light" to="/document">
-                                <i class="fa-solid fa-file"></i> Documentos</router-link>
+                                <i class="fa-solid fa-file"></i> Documentos
+                            </router-link>
+                        </li>
+                        <li class="nav-item"
+                            v-if="hasUser && (hasUser.email == 'moisespmen@gmail.com' || hasUser.email == 'anaflavia@soluccontconsultorias.com')">
+                            <router-link class="nav-link active text-light" to="/users"
+                                title="Gerencimento de usuários">
+                                <i class="fa-solid fa-users"></i> Usuários
+                            </router-link>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
@@ -91,11 +100,7 @@
                 </div>
             </div>
         </nav>
-
-        <main class="content">
-            <router-view></router-view>
-        </main>
-
+        <router-view></router-view>
         <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -196,7 +201,6 @@ export default {
                     for (const [field, messages] of Object.entries(errors)) {
                         errorMessages += `${messages.join(', ')}\n`;
                     }
-
                     vm.$swal({
                         icon: 'error',
                         title: 'Erro',
@@ -240,20 +244,13 @@ export default {
 </script>
 
 <style scoped>
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
-
 .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
 .footer {
-    margin-top: auto;
+    margin-top: 10px;
     background-color: rgb(0, 46, 93);
     padding-top: 10px;
     text-align: center;
@@ -263,7 +260,6 @@ body {
 nav {
     background-color: rgb(0, 46, 93);
     padding: 1rem;
-    width: 100%;
     height: 60px;
     z-index: 10;
 }
@@ -281,8 +277,6 @@ router-link:hover {
 .content {
     min-height: calc(100vh - 60px);
     padding: 20px;
-    padding-bottom: 60px;
-    position: initial;
 }
 
 .nav-link:hover {
@@ -292,6 +286,11 @@ router-link:hover {
 .social-midia a {
     color: white;
     margin-left: 20px;
+}
+
+.social-midia a :hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 .auth {
