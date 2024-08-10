@@ -16,13 +16,6 @@ export default defineConfig({
             '@': resolve(__dirname, 'resources/js'),
         },
     },
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `@import "@/assets/scss/_variables.scss";`
-            }
-        }
-    },
     build: {
         outDir: 'public/build',
         manifest: true,

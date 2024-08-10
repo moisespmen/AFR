@@ -1,5 +1,5 @@
 <template>
-    <div class="card-document text-center">
+    <div class="card-document text-center c-contacts">
         <div class="row">
             <h4>Contatos</h4>
         </div>
@@ -56,26 +56,20 @@
     </div>
 </template>
 <style>
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+.c-contacts {
+    margin-left: 100px;
 }
 
-.card-document {
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-}
 .card-contatos {
     margin-top: 20px;
     align-items: start;
 }
+
 .card-contatos .col {
     width: 100%;
     padding: 0;
 }
+
 .card-contatos .col .card {
     width: 100%;
     margin: 0;

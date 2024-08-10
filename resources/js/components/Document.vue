@@ -5,9 +5,10 @@
         </div>
         <div class="row" v-if="user">
             <div class="col col-md-12 text-right">
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDoc">
+                <v-btn :disabled="loadingUser" class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
+                    data-bs-toggle="modal" data-bs-target="#modalDoc" variant="flat">
                     <i class="fa-solid fa-plus"></i> Adicionar Documento
-                </button>
+                </v-btn>
             </div>
         </div>
 
@@ -18,9 +19,10 @@
                     @keyup.enter="getDocumentos()" v-model="protocolo">
             </div>
             <div class="col">
-                <button type="button" class="btn btn-primary" @click="getDocumentos()">
+                <v-btn :disabled="loadingUser" class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
+                    variant="flat" @click="getDocumentos()">
                     <i class="fa-solid fa-magnifying-glass"></i> Buscar
-                </button>
+                </v-btn>
             </div>
         </div>
         <div class="d-flex justify-content-center mt-2 text-primary mt-3" v-if="loading">
@@ -63,15 +65,6 @@
                 </tbody>
             </table>
             <nav aria-label="Page navigation example" class="mt-3">
-                <!--  <ul class="pagination">
-                            <li class="page-item" :class="{ disabled: !paginate.prev_page_url }">
-                                <a class="page-link" href="#"
-                                    @click.prevent="fetchItems(items.prev_page_url)">Previous</a>
-                            </li>
-                            <li class="page-item" :class="{ disabled: !paginate.next_page_url }">
-                                <a class="page-link" href="#" @click.prevent="fetchItems(items.next_page_url)">Next</a>
-                            </li>
-                        </ul> -->
             </nav>
         </div>
     </div>
@@ -113,14 +106,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-sm" @click="adicionar()" :disabled="loadingModal">
-                        <div class="spinner-border spinner-border-sm" role="status" v-if="loadingModal">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <i class="fa-solid fa-floppy-disk" v-else></i> Adicionar
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
-                        ref="fecharModal">Fechar</button>
+                    <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small" data-bs-toggle="modal"
+                        data-bs-target="#modalDoc" variant="flat" @click="adicionar()" :disabled="loadingModal">
+                        <i class="fa-solid fa-floppy-disk"></i> Adicionar
+                    </v-btn>
+                    <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small" data-bs-toggle="modal"
+                        data-bs-target="#modalDoc" variant="flat" data-bs-dismiss="modal" ref="fecharModal"
+                        :disabled="loadingModal">
+                        Fechar
+                    </v-btn>
                 </div>
             </div>
         </div>
@@ -146,7 +140,7 @@ export default {
         }
     },
     computed: {
-        user(){
+        user() {
             return this.$store.state.user
         }
     },
@@ -244,6 +238,7 @@ export default {
 
 .card-document {
     padding-top: 50px;
+    padding-left: 20px;
     margin: 20px;
 }
 </style>

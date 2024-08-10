@@ -70,11 +70,12 @@
                                         <div class="mb-3"></div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Senha</label>
-                                            <input type="password" class="form-control" v-model="formData.password">
+                                            <input type="password" class="form-control" v-model="formData.password" @keyup.enter.prevent="login()">
                                         </div>
-                                        <button class="btn btn-primary" @click.prevent="login()">
+                                        <v-btn :disabled="loadingUser" class="text-none text-subtitle-1"
+                                            color="rgb(0, 46, 93)" size="small" variant="flat" @click.prevent="login()">
                                             <i class="fa-solid fa-door-open"></i> Entrar
-                                        </button>
+                                        </v-btn>
                                     </form>
                                 </li>
                             </ul>
@@ -133,21 +134,18 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-sm" :disabled="loadingSenha"
-                            @click="alterarSenha()">
+                        <v-btn class="text-none text-subtitle-1" size="small" color="rgb(0, 46, 93)"
+                            :disabled="loadingSenha" @click="alterarSenha()">
                             <i class="fa-solid fa-floppy-disk"></i> Salvar
-                        </button>
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
-                            :disabled="loadingSenha">Cancelar</button>
+                        </v-btn>
+                        <v-btn class="text-none text-subtitle-1" size="small" variant="secondary"
+                            :disabled="loadingSenha" data-bs-dismiss="modal">
+                            Cancelar
+                        </v-btn>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <p>Avenida D, esquina com Rua 09, Nº 419, Qd G-11, Lt 01, Edifício Comercial Marista, 4º Andar, Setor
-                Marista, Goiânia – GO</p>
-            <p>&copy; {{ ano }} Ana Flávia Ribeiro. Todos os direitos reservados.</p>
-        </footer>
     </div>
 </template>
 
@@ -239,18 +237,12 @@ export default {
         }
     }
 };
-
-
 </script>
-
 <style scoped>
-.wrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer {
-    margin-top: 10px;
+.footer-navbar {
+    margin-top: 15%;
+    margin-bottom: auto;
+    padding-bottom: auto;
     background-color: rgb(0, 46, 93);
     padding-top: 10px;
     text-align: center;
@@ -259,8 +251,6 @@ export default {
 
 nav {
     background-color: rgb(0, 46, 93);
-    padding: 1rem;
-    height: 60px;
     z-index: 10;
 }
 
@@ -272,11 +262,6 @@ router-link {
 
 router-link:hover {
     text-decoration: underline;
-}
-
-.content {
-    min-height: calc(100vh - 60px);
-    padding: 20px;
 }
 
 .nav-link:hover {

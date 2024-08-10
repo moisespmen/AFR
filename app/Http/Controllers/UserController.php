@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -14,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if(!$user || ($user->email !== 'anaflavia@soluccontconsultorias.com' && $user->email !== 'moisespmen@gmail.com' )){
+        if (!$user || ($user->email !== 'anaflavia@soluccontconsultorias.com' && $user->email !== 'moisespmen@gmail.com')) {
             abort(403, 'Não autorizado!');
         }
 
@@ -35,7 +38,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $val = Validator::make($request->all(), [
+            'name' => "required",
+            'email' => "required|email",
+        ]);
+        if ($val->fails()) {
+            throw new \Exception($val->errors());
+        }
+        try {
+            DB::beginTransaction();
+            if ($request->get('id')) {
+                $user = User::findOrFail($request['id']);
+            } else {
+                $user = new User();
+            }
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            if ($request->get('password') && $request['password'] == $request['confirm']) {
+                $user->password = bcrypt($request['password']);
+            }
+            $user->save();
+            DB::commit();
+            return response()->json('Usuário salvo com sucesso');
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->getMessage());
+        }
     }
 
     /**
@@ -70,7 +98,8 @@ class UserController extends Controller
         //
     }
 
-    public function me(){
+    public function me()
+    {
         $user = Auth::user();
         return response()->json(['user' => $user], 200);
     }
