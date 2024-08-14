@@ -72,7 +72,7 @@
                             <i class="fa-solid fa-floppy-disk"></i> Salvar
                         </v-btn>
                         <v-btn :disabled="loadingUser" class="text-none text-subtitle-1"
-                            size="small" variant="secondary" data-bs-dismiss="modal">
+                            size="small" color="grey-lighten-3" data-bs-dismiss="modal">
                             Fechar
                         </v-btn>
                     </div>

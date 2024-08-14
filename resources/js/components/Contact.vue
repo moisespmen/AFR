@@ -3,10 +3,10 @@
         <div class="row">
             <h4>Contatos</h4>
         </div>
-        <div class="row card-contatos">
+        <div class="row mt-6">
             <div class="col">
                 <div class="card">
-                    <div class="card-body text-start">
+                    <div class="card-body text-center">
                         <span> <b><i class="fa-brands fa-instagram"></i> Instagram: </b> <a
                                 href="https://www.instagram.com/anaflaviaribeiro.cont" target="_blank">
                                 anaflaviaribeiro.cont </a></span>
@@ -14,10 +14,10 @@
                 </div>
             </div>
         </div>
-        <div class="row card-contatos">
+        <div class="row mt-6">
             <div class="col">
-                <div class="card">
-                    <div class="card-body text-start">
+                <div class="card card-contacts">
+                    <div class="card-body text-center">
                         <span> <b><i class="fa-brands fa-whatsapp"></i> Whatsapp: </b> <a
                                 href="https://wa.me/5562996132702" target="_blank">
                                 (62) 99613-2702
@@ -27,10 +27,10 @@
                 </div>
             </div>
         </div>
-        <div class="row card-contatos">
+        <div class="row mt-6">
             <div class="col">
                 <div class="card">
-                    <div class="card-body text-start">
+                    <div class="card-body text-center">
                         <span> <b><i class="fa-solid fa-envelope"></i> Email: </b> <a
                                 href="mailto:assessoriarj@soluccontconsultorias.com">
                                 assessoriarj@soluccontconsultorias.com
@@ -40,10 +40,10 @@
                 </div>
             </div>
         </div>
-        <div class="row card-contatos">
+        <div class="row mt-6">
             <div class="col">
                 <div class="card">
-                    <div class="card-body text-start">
+                    <div class="card-body text-center">
                         <span> <b><i class="fa-brands fa-linkedin"></i> Linkedin: </b> <a
                                 href="https://www.linkedin.com/in/ana-flavia-ribeiro-0b9008224" target="_blank">
                                 Ana Flavia Ribeiro
@@ -60,18 +60,5 @@
     margin-left: 100px;
 }
 
-.card-contatos {
-    margin-top: 20px;
-    align-items: start;
-}
 
-.card-contatos .col {
-    width: 100%;
-    padding: 0;
-}
-
-.card-contatos .col .card {
-    width: 100%;
-    margin: 0;
-}
 </style>

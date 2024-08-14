@@ -7,9 +7,9 @@
         </main>
 
         <footer class="mt-auto text-white text-center p-3 footer-main">
-            <p>Avenida D, esquina com Rua 09, Nº 419, Qd G-11, Lt 01, Edifício Comercial Marista, 4º Andar, Setor
-                Marista, Goiânia – GO</p>
-            <p>&copy; {{ ano }} Ana Flávia Ribeiro. Todos os direitos reservados.</p>
+            <span>Avenida Olinda, 960, Business Tower, Sala 304, Park Lozandes, Goiânia - GO, CEP: 74.884-120.</span>
+            <br>
+            <span>&copy; {{ ano }} Ana Flávia Ribeiro. Todos os direitos reservados.</span>
         </footer>
     </div>
 </template>

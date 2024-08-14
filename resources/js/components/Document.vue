@@ -5,8 +5,8 @@
         </div>
         <div class="row" v-if="user">
             <div class="col col-md-12 text-right">
-                <v-btn :disabled="loadingUser" class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
-                    data-bs-toggle="modal" data-bs-target="#modalDoc" variant="flat">
+                <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small" data-bs-toggle="modal"
+                    data-bs-target="#modalDoc" variant="flat" @click="clearModal()">
                     <i class="fa-solid fa-plus"></i> Adicionar Documento
                 </v-btn>
             </div>
@@ -19,8 +19,8 @@
                     @keyup.enter="getDocumentos()" v-model="protocolo">
             </div>
             <div class="col">
-                <v-btn :disabled="loadingUser" class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
-                    variant="flat" @click="getDocumentos()">
+                <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" variant="flat"
+                    @click="getDocumentos()">
                     <i class="fa-solid fa-magnifying-glass"></i> Buscar
                 </v-btn>
             </div>
@@ -54,7 +54,7 @@
                             </a>
                             <a v-else-if="getExtensao(doc.path) == 'jpg' || getExtensao(doc.path) == 'jpeg' || getExtensao(doc.path) == 'png'"
                                 :href="doc.path.replace('public', 'storage')" target="_blank" title="Visualizar">
-                                <i class="fa-solid fa-image"></i>
+                                <i class="fa-solid fa-image fa-2xl"></i>
                             </a>
                         </td>
                         <td>{{ doc.protocolo }}</td>
@@ -110,7 +110,7 @@
                         data-bs-target="#modalDoc" variant="flat" @click="adicionar()" :disabled="loadingModal">
                         <i class="fa-solid fa-floppy-disk"></i> Adicionar
                     </v-btn>
-                    <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small" data-bs-toggle="modal"
+                    <v-btn class="text-none text-subtitle-1" size="small" data-bs-toggle="modal" color="grey-lighten-3"
                         data-bs-target="#modalDoc" variant="flat" data-bs-dismiss="modal" ref="fecharModal"
                         :disabled="loadingModal">
                         Fechar
@@ -148,13 +148,20 @@ export default {
 
     },
     methods: {
+        clearModal() {
+            this.protocolo = "";
+            this.descricao = "";
+            this.file = null;
+        },
         excluir(doc) {
             this.$swal({
                 icon: 'warning',
                 title: "Deseja realmente excluir este arquivo?",
+                footer: 'Esta ação não poderá ser revertida!',
                 showDenyButton: true,
                 confirmButtonText: "Sim, Excluir",
-                confirmButtonColor: '#0d6efd',
+                confirmButtonColor: '#87CEEB',
+                denyButtonColor: '#DCDCDC',
                 denyButtonText: `Cancelar`
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -175,7 +182,7 @@ export default {
         getDocumentos() {
             const vm = this;
             if (!this.user && !this.protocolo) {
-                return this.$swal('Informe um numero de protocolo', "", "error")
+                return this.$swal('Informe um número de protocolo', "", "error")
             }
             const url = this.user ? '/api/documentos-user' : '/api/documentos'
             vm.loading = true

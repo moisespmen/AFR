@@ -30,7 +30,7 @@ class DocumentosController extends Controller
         if ($request->get('perPage')) {
             $documentos = $documentos->paginate($request['perPage']);
         } else {
-            $documentos = $documentos->get();
+            $documentos = $documentos->limit(30)->get();
         }
         return response()->json($documentos);
     }

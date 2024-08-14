@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <img src="http://localhost:8000/image/background.jpg" class="image-body">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
@@ -8,10 +9,21 @@
                     <span class="text-light"><i class="fa-solid fa-bars"></i></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ul-img">
+                        <router-link to="/">
+                            <img src="http://localhost:8000/image/anaflavia.webp" alt=""
+                                class="img-fluid img-background header-text">
+                        </router-link>
+                    </ul>
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <router-link class="nav-link active text-light" to="/">
                                 <i class="fa-solid fa-house"></i> Início
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link active text-light" to="/about">
+                                <i class="fa-solid fa-circle-info"></i> Sobre
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -32,6 +44,7 @@
                             </router-link>
                         </li>
                     </ul>
+
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
                         <li class="nav-item">
                             <div class="social-midia">
@@ -70,10 +83,11 @@
                                         <div class="mb-3"></div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Senha</label>
-                                            <input type="password" class="form-control" v-model="formData.password" @keyup.enter.prevent="login()">
+                                            <input type="password" class="form-control" v-model="formData.password"
+                                                @keyup.enter.prevent="login()">
                                         </div>
-                                        <v-btn :disabled="loadingUser" class="text-none text-subtitle-1"
-                                            color="rgb(0, 46, 93)" size="small" variant="flat" @click.prevent="login()">
+                                        <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
+                                            variant="flat" @click.prevent="login()">
                                             <i class="fa-solid fa-door-open"></i> Entrar
                                         </v-btn>
                                     </form>
@@ -101,7 +115,7 @@
                 </div>
             </div>
         </nav>
-        <router-view></router-view>
+            <router-view></router-view>
         <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -138,7 +152,7 @@
                             :disabled="loadingSenha" @click="alterarSenha()">
                             <i class="fa-solid fa-floppy-disk"></i> Salvar
                         </v-btn>
-                        <v-btn class="text-none text-subtitle-1" size="small" variant="secondary"
+                        <v-btn class="text-none text-subtitle-1" size="small" color="grey-lighten-3"
                             :disabled="loadingSenha" data-bs-dismiss="modal">
                             Cancelar
                         </v-btn>
@@ -282,9 +296,17 @@ router-link:hover {
     margin-left: 10px;
 }
 
+.ul-img {
+    max-width: 30%;
+}
+
 @media (max-width: 768px) {
     .container-fluid {
         background-color: rgb(0, 46, 93);
+    }
+
+    .ul-img {
+        max-width: 100%;
     }
 }
 </style>
