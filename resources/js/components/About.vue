@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card class="mx-auto my-8 card-about" elevation="20" max-width="600">
+        <v-card class="ml-6 my-8 card-about mr-3" elevation="20" max-width="600">
             <v-card-item>
                 <v-card-title>
                     Sobre:
@@ -24,7 +24,7 @@
                 </p>
             </v-card-text>
         </v-card>
-        <v-card class="mx-auto my-8 card-about" elevation="20" max-width="600">
+        <v-card class="ml-6 my-8 card-about mr-3" elevation="20" max-width="600">
             <v-card-item>
                 <v-card-title>
                     Atua nos seguintes ramos:
@@ -42,49 +42,6 @@
                 </p>
             </v-card-text>
         </v-card>
-
-
-
-        <!-- <div class="card-container d-flex justify-content-center">
-            <div class="row row-card-home">
-                <div class="col text-center">
-                    <div class="card home-card">
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text">Contadora, bacharel em Ciências Contábeis pela Pontifícia Universidade
-                                Católica
-                                de
-                                Goiás, inscrita no Conselho Federal de Contabilidade de Goiás. Perita Judicial e
-                                Extrajudicial
-                                cadastrada no Banco de Peritos Judiciais da Corregedoria-Geral da Justiça do Estado de
-                                Goiás.
-                                Administradora Judicial cadastrada no Banco de Administradores Judiciais da
-                                Corregedoria-Geral
-                                da
-                                Justiça do Estado de Goiás. Graduanda de Direito na Universidade Salgado Filho de Goiás.
-                                Corretora e
-                                Avaliadora de Imóveis, inscrita no Conselho Regional de Corretores de Imóveis de Goiás.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col text-center">
-                    <div class="card home-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Atua nos seguintes ramos:</h5>
-                            <p class="card-text">Recuperação Judicial, Falência, Perícia Judicial e Extrajudicial,
-                                Avaliação de
-                                Imóveis, Contabilidade Privada, Contabilidade Pública, Auditoria Operacional, Auditoria
-                                de
-                                Conformidade, Auditoria Governamental, Accountability, Compliance, Pericia Financeira,
-                                Pericia
-                                Bancária, Pericia Contábil, Valuation, Dissolução de Sociedades e Apuração de Haveres.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
     </div>
 </template>
 
@@ -92,6 +49,7 @@
 <style>
 .card-about {
     background-color: rgba(255, 255, 255, 0.9);
+    text-align: justify;
 }
 
 .row-card-home {
@@ -126,9 +84,4 @@
     padding-bottom: 30px;
 }
 
-@media (max-width: 768px) {
-    .home-card {
-        min-height: 500px;
-    }
-}
 </style>

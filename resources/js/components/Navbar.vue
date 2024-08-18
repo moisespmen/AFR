@@ -11,8 +11,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ul-img">
                         <router-link to="/">
-                            <img src="http://localhost:8000/image/anaflavia.webp" alt=""
-                                class="img-fluid img-background header-text">
+                            <img src="http://localhost:8000/image/anaflavia.webp" alt="" class="img-fluid">
                         </router-link>
                     </ul>
                     <ul class="navbar-nav me-auto">

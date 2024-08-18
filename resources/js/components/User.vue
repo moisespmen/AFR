@@ -1,5 +1,5 @@
 <template>
-    <div class="card-document user-table table-responsive">
+    <v-card color="white" variant="flat" class="mx-auto pa-6 mt-6 ml-6 mr-6">
         <div class="row mb-3">
             <h4>Usuários</h4>
         </div>
@@ -34,58 +34,51 @@
                 </tr>
             </tbody>
         </table>
-        <div class="modal fade" id="modalUser" tabindex="-1" aria-labelledby="modalUser" aria-hidden="true">
-            <v-overlay :model-value="loading" class="align-center justify-center">
-                <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
-            </v-overlay>
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            {{ user.name && user.id ? user.name : "Novo usuário" }}
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <v-dialog v-model="modalUser" width="600" transition="dialog-top-transition">
+            <v-card class="p-3 m-3">
+                <v-overlay :model-value="loading" class="align-center justify-center">
+                    <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+                </v-overlay>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    {{ user.name && user.id ? user.name : "Novo usuário" }}
+                </h1>
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" v-model="user.name">
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nome:</label>
-                                <input type="text" class="form-control" v-model="user.name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Email:</label>
-                                <input type="email" class="form-control" v-model="user.email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Senha:</label>
-                                <input type="password" class="form-control" v-model="user.password">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Confirma:</label>
-                                <input type="password" class="form-control" v-model="user.confirm">
-                            </div>
-                        </form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" v-model="user.email">
                     </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Senha:</label>
+                        <input type="password" class="form-control" v-model="user.password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Confirma:</label>
+                        <input type="password" class="form-control" v-model="user.confirm">
+                    </div>
+                </form>
+                <template v-slot:actions>
                     <div class="modal-footer">
-                        <v-btn :disabled="loadingUser" class="text-none text-subtitle-1" color="rgb(0, 46, 93)"
+                        <v-btn :disabled="loadingUser" class="text-subtitle-1" color="rgb(0, 46, 93)"
                             size="small" variant="flat" @click="save()">
                             <i class="fa-solid fa-floppy-disk"></i> Salvar
                         </v-btn>
-                        <v-btn :disabled="loadingUser" class="text-none text-subtitle-1"
-                            size="small" color="grey-lighten-3" data-bs-dismiss="modal">
+                        <v-btn :disabled="loadingUser" size="small" @click="modalUser = false">
                             Fechar
                         </v-btn>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </template>
+            </v-card>
+        </v-dialog>
+    </v-card>
 </template>
 
 <script>
 import axios from '../axios';
 import moment from 'moment';
-import { Modal } from 'bootstrap';
 export default {
     data() {
         return {
@@ -100,7 +93,7 @@ export default {
                 password: "",
                 confirm: ""
             },
-            modalElement: null
+            modalUser: false
         }
     },
     computed: {
@@ -150,6 +143,7 @@ export default {
                         password: "",
                         confirm: ""
                     }
+                    vm.modalUser = false
                     vm.getUsers();
                 }).catch((error) => {
                     console.log(error)
@@ -163,7 +157,7 @@ export default {
                 })
         },
         edit(user) {
-            if (user) {
+            if (user && user.id) {
                 this.user = user
             } else {
                 this.user = {
@@ -174,9 +168,7 @@ export default {
                     confirm: ""
                 }
             }
-            const modalElement = document.getElementById('modalUser');
-            this.modalInstance = new Modal(modalElement);
-            this.modalInstance.show();
+            this.modalUser = true;
         },
         getUsers() {
             const vm = this;

@@ -1,14 +1,24 @@
 <template>
     <div>
-        <v-card class="mx-left ml-6 mt-6 mr-3 home-card" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> RECUPERAÇÃO JUDICIAL</v-card-title></v-card>
-        <v-card class="mx-left ml-6 mt-6 mr-3" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> AVALIAÇÃO DE IMÓVEIS</v-card-title></v-card>
-        <v-card class="mx-left ml-6 mt-6 mr-3" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> PERICIA CONTÁBIL</v-card-title></v-card>
-        <v-card class="mx-left ml-6 mt-6 mr-3" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> FINANCEIRA E GRAFOTÉCNICA</v-card-title></v-card>
-        <v-card class="mx-left ml-6 mt-6 mr-3" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> DISSOLUÇÃO DE SOCIEDADE E VALUATION</v-card-title></v-card>
+        <v-card class="mx-left ml-6 mt-6 mr-3 home-card animated-card" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> RECUPERAÇÃO JUDICIAL</v-card-title></v-card>
+        <v-card class="mx-left ml-6 mt-6 mr-3 home-card animated-card" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> AVALIAÇÃO DE IMÓVEIS</v-card-title></v-card>
+        <v-card class="mx-left ml-6 mt-6 mr-3 home-card animated-card" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> PERÍCIA CONTÁBIL</v-card-title></v-card>
+        <v-card class="mx-left ml-6 mt-6 mr-3 home-card animated-card" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> PERÍCIA FINANCEIRA E GRAFOTÉCNICA</v-card-title></v-card>
+        <v-card class="mx-left ml-6 mt-6 mr-3 home-card animated-card" max-width="500"><v-card-title><i class="fa-solid fa-pen-nib"></i> DISSOLUÇÃO DE SOCIEDADE E VALUATION</v-card-title></v-card>
     </div>
 </template>
 
 <style>
+.animated-card {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  background-color: #f5f5f5;
+}
+
+.animated-card:hover {
+  transform: scale(1.1);
+  background-color: #b6791c;
+}
+
 .image-body {
     position: absolute;
     top: 0;
@@ -18,8 +28,6 @@
     object-fit: cover;
     z-index: -1;
 }
-
-
 
 .header-text {
     margin-top: 0px;

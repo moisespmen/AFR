@@ -30,7 +30,7 @@ class DocumentosController extends Controller
         if ($request->get('perPage')) {
             $documentos = $documentos->paginate($request['perPage']);
         } else {
-            $documentos = $documentos->limit(30)->get();
+            $documentos = $documentos->limit(50)->get();
         }
         return response()->json($documentos);
     }
@@ -63,14 +63,11 @@ class DocumentosController extends Controller
             $file = $request->file('file');
             $nameFile = Str::random(16) . '.' . $extension;
             $path = Storage::putFileAs('public/documento/' .  $request['protocolo'], $file, $nameFile);
-            // $path = Storage::putFileAs('/public/documento/' . $request['protocolo'], new File($file), $nameFile);
-
             $documento = new Documento();
             $documento->path = $path;
             $documento->descricao = $request['descricao'];
             $documento->protocolo = $request['protocolo'];
             $documento->user_id = $user->id;
-
             $documento->save();
             DB::commit();
             return response()->json('Documento adicionado com sucesso!');
