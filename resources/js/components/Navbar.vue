@@ -3,14 +3,23 @@
         <img src="http://localhost:8000/image/background.jpg" class="image-body">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="text-light"><i class="fa-solid fa-bars"></i></span>
-                </button>
+                <v-row>
+                    <v-col>
+                        <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="text-light"><i class="fa-solid fa-bars"></i></span>
+                        </button>
+                    </v-col>
+                    <v-col>
+                        <router-link to="/" class="img-layout-mobile">
+                            <img src="http://localhost:8000/image/anaflavia.webp" alt="" style="width: 250px;">
+                        </router-link>
+                    </v-col>
+                </v-row>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ul-img">
-                        <router-link to="/">
+                        <router-link to="/" class="img-layout-web">
                             <img src="http://localhost:8000/image/anaflavia.webp" alt="" class="img-fluid">
                         </router-link>
                     </ul>
@@ -114,7 +123,7 @@
                 </div>
             </div>
         </nav>
-            <router-view></router-view>
+        <router-view></router-view>
         <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -299,7 +308,23 @@ router-link:hover {
     max-width: 30%;
 }
 
+.img-layout-mobile {
+    display: none;
+}
+
+.img-layout-web {
+    display: flex;
+}
+
 @media (max-width: 768px) {
+    .img-layout-web {
+        display: none;
+    }
+
+    .img-layout-mobile {
+        display: flex
+    }
+
     .container-fluid {
         background-color: rgb(0, 46, 93);
     }
