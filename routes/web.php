@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/api')->group(function () {
+/*Route::prefix('/api')->group(function () {
     Route::post('/login', [LoginController::class, 'login']);
     Route::get('/documentos', [DocumentosController::class, 'index']);
     Route::group(['middleware' => ['auth:app', 'jwt.auth']], function () {
@@ -19,7 +19,7 @@ Route::prefix('/api')->group(function () {
         Route::post('/documentos', [DocumentosController::class, 'store']);
         Route::delete('/documentos/{id}', [DocumentosController::class, 'destroy']);
     });
-});
+});*/
 
 Route::get('/{any}', function () {
     return view('app');
