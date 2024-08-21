@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'manifest_path' => public_path('build/manifest.json'),
+    'manifest_path' => public_path('build/.vite/manifest.json'),
 ];
