@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <img src="http://localhost:8000/image/background.jpg" class="image-body">
+        <img src="https://anaflaviaribeiro.com.br/image/background.jpg" class="image-body">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <v-row>
@@ -13,14 +13,14 @@
                     </v-col>
                     <v-col>
                         <router-link to="/" class="img-layout-mobile">
-                            <img src="http://localhost:8000/image/anaflavia.webp" alt="" style="width: 250px;">
+                            <img src="https://anaflaviaribeiro.com.br/image/anaflavia.webp" alt="" style="width: 250px;">
                         </router-link>
                     </v-col>
                 </v-row>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ul-img">
                         <router-link to="/" class="img-layout-web">
-                            <img src="http://localhost:8000/image/anaflavia.webp" alt="" class="img-fluid">
+                            <img src="https://anaflaviaribeiro.com.br/image/anaflavia.webp" alt="" class="img-fluid">
                         </router-link>
                     </ul>
                     <ul class="navbar-nav me-auto">
