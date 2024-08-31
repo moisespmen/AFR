@@ -1,127 +1,124 @@
 <template>
-    <div class="wrapper">
-        <img src="https://anaflaviaribeiro.com.br/image/background.jpg" class="image-body">
+    <div class="wrapper background-master">
         <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <v-row>
-                    <v-col>
-                        <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="text-light"><i class="fa-solid fa-bars"></i></span>
-                        </button>
-                    </v-col>
-                    <v-col>
-                        <router-link to="/" class="img-layout-mobile">
-                            <img src="https://anaflaviaribeiro.com.br/image/anaflavia.webp" alt="" style="width: 250px;">
+            <v-row>
+                <v-col>
+                    <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="text-light"><i class="fa-solid fa-bars"></i></span>
+                    </button>
+                </v-col>
+                <v-col>
+                    <router-link to="/" class="img-layout-mobile">
+                        <img src="https://anaflaviaribeiro.com.br/image/anaflavia.webp" alt="" style="width: 250px;">
+                    </router-link>
+                </v-col>
+            </v-row>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ul-img me-auto ">
+                    <router-link to="/" class="img-layout-web">
+                        <img src="https://anaflaviaribeiro.com.br/image/anaflavia.webp" alt="" class="img-fluid">
+                    </router-link>
+                </ul>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <router-link class="nav-link active text-light" to="/">
+                            <i class="fa-solid fa-house"></i> Início
                         </router-link>
-                    </v-col>
-                </v-row>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ul-img">
-                        <router-link to="/" class="img-layout-web">
-                            <img src="https://anaflaviaribeiro.com.br/image/anaflavia.webp" alt="" class="img-fluid">
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link active text-light" to="/about">
+                            <i class="fa-solid fa-circle-info"></i> Sobre
                         </router-link>
-                    </ul>
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <router-link class="nav-link active text-light" to="/">
-                                <i class="fa-solid fa-house"></i> Início
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link active text-light" to="/about">
-                                <i class="fa-solid fa-circle-info"></i> Sobre
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link active text-light" to="/contacts">
-                                <i class="fa-solid fa-envelopes-bulk"></i> Contatos
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link active text-light" to="/document">
-                                <i class="fa-solid fa-file"></i> Documentos
-                            </router-link>
-                        </li>
-                        <li class="nav-item"
-                            v-if="hasUser && (hasUser.email == 'moisespmen@gmail.com' || hasUser.email == 'anaflavia@soluccontconsultorias.com')">
-                            <router-link class="nav-link active text-light" to="/users"
-                                title="Gerencimento de usuários">
-                                <i class="fa-solid fa-users"></i> Usuários
-                            </router-link>
-                        </li>
-                    </ul>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link active text-light" to="/contacts">
+                            <i class="fa-solid fa-envelopes-bulk"></i> Contatos
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link active text-light" to="/document">
+                            <i class="fa-solid fa-file"></i> Documentos
+                        </router-link>
+                    </li>
+                    <li class="nav-item"
+                        v-if="hasUser && (hasUser.email == 'moisespmen@gmail.com' || hasUser.email == 'anaflavia@soluccontconsultorias.com')">
+                        <router-link class="nav-link active text-light" to="/users" title="Gerencimento de usuários">
+                            <i class="fa-solid fa-users"></i> Usuários
+                        </router-link>
+                    </li>
+                </ul>
 
-                    <ul class="navbar-nav ms-auto d-flex align-items-center">
-                        <li class="nav-item">
-                            <div class="social-midia">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="nav-item">
+                        <div class="social-midia">
 
-                                <a href="https://www.instagram.com/anaflaviaribeiro.cont?igsh=dWI3enIzOWRya3Bp&utm_source=qr"
-                                    target="_blank" title="Instagram Ana Flavia Ribeiro">
-                                    <i class="fa-brands fa-instagram fa-xl"></i>
-                                </a>
-                                <a href="https://www.linkedin.com/in/ana-flavia-ribeiro-0b9008224/" target="_blank"
-                                    title="Linkedin">
-                                    <i class="fa-brands fa-linkedin fa-xl"></i>
-                                </a>
-                                <a href="https://wa.me/5562996132702" target="_blank" title="Whatsapp: (62) 99613-2702">
-                                    <i class="fa-brands fa-whatsapp fa-xl"></i>
-                                </a>
-                                <a href="mailto:assessoriarj@soluccontconsultorias.com"
-                                    title="Email: assessoriarj@soluccontconsultorias.com">
-                                    <i class="fa-regular fa-envelope fa-xl"></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown auth" v-if="!hasUser">
-                            <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="fa-solid fa-user"></i> Acessar
+                            <a href="https://www.instagram.com/anaflaviaribeiro.cont?igsh=dWI3enIzOWRya3Bp&utm_source=qr"
+                                target="_blank" title="Instagram Ana Flavia Ribeiro">
+                                <i class="fa-brands fa-instagram fa-xl"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 260px;">
-                                <li>
-                                    <form class="p-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <label for="" class="form-label">Login</label>
-                                                <input type="text" class="form-control" v-model="formData.login">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3"></div>
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Senha</label>
-                                            <input type="password" class="form-control" v-model="formData.password"
-                                                @keyup.enter.prevent="login()">
-                                        </div>
-                                        <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
-                                            variant="flat" @click.prevent="login()">
-                                            <i class="fa-solid fa-door-open"></i> Entrar
-                                        </v-btn>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown auth" v-else>
-                            <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="fa-solid fa-user"></i> {{ getUserName }}
+                            <a href="https://www.linkedin.com/in/ana-flavia-ribeiro-0b9008224/" target="_blank"
+                                title="Linkedin">
+                                <i class="fa-brands fa-linkedin fa-xl"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 260px;">
-                                <li>
-                                    <button class="btn btn-outline-light btn-sm" data-bs-target="#modalSenha"
-                                        data-bs-toggle="modal" style="color:black"><i class="fa-solid fa-lock"></i>
-                                        Alterar Senha </button>
-                                </li>
-                                <li class="mt-3">
-                                    <button class="btn btn-outline-light btn-sm" style="color:black" @click="logoff"><i
-                                            class="fa-solid fa-right-from-bracket"></i> Sair</button>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                            <a href="https://wa.me/5562996132702" target="_blank" title="Whatsapp: (62) 99613-2702">
+                                <i class="fa-brands fa-whatsapp fa-xl"></i>
+                            </a>
+                            <a href="mailto:assessoriarj@soluccontconsultorias.com"
+                                title="Email: assessoriarj@soluccontconsultorias.com">
+                                <i class="fa-regular fa-envelope fa-xl"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown auth" v-if="!hasUser">
+                        <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> Acessar
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 260px;">
+                            <li>
+                                <form class="p-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="" class="form-label">Login</label>
+                                            <input type="text" class="form-control" v-model="formData.login">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3"></div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Senha</label>
+                                        <input type="password" class="form-control" v-model="formData.password"
+                                            @keyup.enter.prevent="login()">
+                                    </div>
+                                    <v-btn class="text-none text-subtitle-1" color="rgb(0, 46, 93)" size="small"
+                                        variant="flat" @click.prevent="login()">
+                                        <i class="fa-solid fa-door-open"></i> Entrar
+                                    </v-btn>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown auth" v-else>
+                        <a class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> {{ getUserName }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 260px;">
+                            <li>
+                                <button class="btn btn-outline-light btn-sm" data-bs-target="#modalSenha"
+                                    data-bs-toggle="modal" style="color:black"><i class="fa-solid fa-lock"></i>
+                                    Alterar Senha </button>
+                            </li>
+                            <li class="mt-3">
+                                <button class="btn btn-outline-light btn-sm" style="color:black" @click="logoff"><i
+                                        class="fa-solid fa-right-from-bracket"></i> Sair</button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
+
         </nav>
         <router-view></router-view>
         <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -261,6 +258,19 @@ export default {
 };
 </script>
 <style scoped>
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .footer-navbar {
     margin-top: 15%;
     margin-bottom: auto;
@@ -269,6 +279,16 @@ export default {
     padding-top: 10px;
     text-align: center;
     color: aliceblue;
+}
+
+.background-master {
+    background-image: url('https://anaflaviaribeiro.com.br/image/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 nav {
@@ -305,6 +325,13 @@ router-link:hover {
 }
 
 .ul-img {
+    display: flex;
+    justify-content: flex-start;
+    /* Alinha o conteúdo à esquerda */
+    padding-left: 0;
+    /* Remove qualquer padding à esquerda */
+    margin-left: 0;
+    /* Remove qualquer margem à esquerda */
     max-width: 30%;
 }
 
@@ -313,7 +340,11 @@ router-link:hover {
 }
 
 .img-layout-web {
-    display: flex;
+    display: block;
+    text-align: left;
+    /* Alinha o conteúdo (imagem) à esquerda */
+    margin-left: 0;
+    /* Remove qualquer margem à esquerda */
 }
 
 @media (max-width: 768px) {
